@@ -19,7 +19,7 @@ const test = base.extend<{ runtimeErrors: string[] }>({
 test.use({ timezoneId: 'America/Sao_Paulo' });
 
 async function openSite(page: Page) {
-  await page.goto('/');
+  await page.goto('./');
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
 }
 

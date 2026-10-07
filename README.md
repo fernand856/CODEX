@@ -44,7 +44,7 @@ npm ci
 npm run dev
 ```
 
-Em uma máquina local, abra `http://localhost:3000`. No ambiente cloud, abra a URL real fornecida pelo encaminhamento da porta 3000 ou pela prévia da plataforma. O endereço `localhost` exibido no terminal pertence à máquina em que o servidor está executando; não é a URL externa para acessar a máquina remota.
+Em uma máquina local, abra `http://localhost:3000/CODEX/`. No ambiente cloud, abra a URL real fornecida pelo encaminhamento da porta 3000 ou pela prévia da plataforma e use os comandos com base relativa abaixo. O endereço `localhost` exibido no terminal pertence à máquina em que o servidor está executando; não é a URL externa para acessar a máquina remota.
 
 ## Manter a prévia web funcionando
 
@@ -52,13 +52,13 @@ Para conferir o build estático neste ambiente:
 
 ```bash
 cd /workspace/CODEX
-npm run build
-npm run preview
+npm run build -- --base=./ --outDir dist-cloud
+npm run preview -- --base=./ --outDir dist-cloud
 ```
 
-O preview escuta em `0.0.0.0:3000`. Mantenha o processo em execução e abra a prévia encaminhada para essa porta. Esse comando serve para inspeção e não publica o projeto em uma hospedagem externa.
+O preview escuta em `0.0.0.0:3000` e serve a pasta local ignorada `dist-cloud/`. Essa saída separada permite gerar `dist/` para o Pages e executar seus testes sem trocar os arquivos usados pela prévia cloud. Mantenha o processo em execução e abra a prévia encaminhada para essa porta. Esse comando serve para inspeção e não publica o projeto em uma hospedagem externa.
 
-Depois de recriar ou reiniciar a máquina cloud, execute `npm run preview` novamente. Se as dependências ou o build não estiverem disponíveis, execute primeiro `npm ci` e `npm run build`. Os arquivos do projeto não mantêm um servidor em execução por si mesmos. Os servidores de desenvolvimento e preview usam a mesma porta 3000: encerre um com `Ctrl+C` antes de iniciar o outro.
+Depois de recriar ou reiniciar a máquina cloud, execute `npm run preview -- --base=./ --outDir dist-cloud` novamente. Se as dependências ou o build não estiverem disponíveis, execute primeiro `npm ci` e `npm run build -- --base=./ --outDir dist-cloud`. Para desenvolvimento na prévia cloud, use `npm run dev -- --base=./`. Os arquivos do projeto não mantêm um servidor em execução por si mesmos. Os servidores de desenvolvimento e preview usam a mesma porta 3000: encerre um com `Ctrl+C` antes de iniciar o outro.
 
 As instruções reutilizáveis de instalação e inicialização foram salvas em rascunho nas configurações do ambiente cloud. Para aplicá-las a futuras instâncias, o responsável precisa revisar e publicar essa configuração. Salvar o rascunho não executa os comandos nem publica o ambiente; a prévia atual já está em execução.
 
@@ -72,7 +72,7 @@ npm run test:e2e
 npm run preview
 ```
 
-O build é gerado em `dist/`. Os testes de interface usam esse build e iniciam seu próprio preview na porta 4173, definida explicitamente em `playwright.config.ts`. Se Chromium não estiver disponível, instale o navegador de teste com `npx playwright install chromium`; dependências do sistema podem exigir instalação pelo administrador do ambiente. O último comando permite conferir o resultado na porta 3000, localmente em `http://localhost:3000` ou pela URL encaminhada da plataforma; ele não publica o site. Consulte `VALIDACAO.md` para os resultados obtidos nesta entrega e as verificações que ainda dependem de outro ambiente.
+O build é gerado em `dist/`, com base `/CODEX/`. Os testes de interface usam esse build e iniciam seu próprio preview em `http://127.0.0.1:4173/CODEX/`, definido em `playwright.config.ts`. Se Chromium não estiver disponível, instale o navegador de teste com `npx playwright install chromium`; dependências do sistema podem exigir instalação pelo administrador do ambiente. O último comando permite conferir o resultado localmente em `http://localhost:3000/CODEX/`; ele não publica o site. Consulte `VALIDACAO.md` para os resultados obtidos nesta entrega e as verificações que ainda dependem de outro ambiente.
 
 ## Onde editar
 
@@ -100,18 +100,32 @@ Arquivos de apoio gerados localmente em `entrega/`, mantidos fora do versionamen
 
 Os ZIPs retratam o momento em que foram gerados e podem conter documentação anterior às notas atuais. Arquivos ZIP são pacotes comprimidos para extrair; a interface exibiu “Prévia de arquivo não suportada” para eles. Para trabalhar com a entrega, use diretamente o código, o build e o HTML portátil. Depois de personalizar o projeto, gere um novo build e substitua os arquivos publicados pelo novo resultado.
 
+## Publicar no GitHub Pages
+
+O destino deste projeto é `https://fernand856.github.io/CODEX/`. O padrão em `vite.config.ts` é `base: '/CODEX/'`: scripts, CSS, favicon e imagens usam esse prefixo, incluindo os caminhos gerados pelo helper `asset()`.
+
+1. No repositório GitHub, abra **Settings → Pages → Build and deployment** e selecione **GitHub Actions** como Source.
+2. Incorpore o PR de configuração à `main`. O workflow `.github/workflows/pages.yml` executa `npm ci`, `npm test` e `npm run build` com Node.js 24, envia somente `dist/` como artefato e publica pelo mecanismo oficial do Pages.
+3. Acompanhe **Actions → Deploy GitHub Pages**. O job `deploy` fornece a URL publicada no ambiente `github-pages`.
+
+PRs direcionados à `main` executam instalação, testes e build, sem publicar. A publicação ocorre em pushes na `main` e também pode ser iniciada em **Actions → Deploy GitHub Pages → Run workflow**, selecionando `main`.
+
+O build é reconstruído pelo workflow a partir do código; o `dist/` versionado da entrega beta não é usado como artefato sem recompilação. O site mantém os avisos demonstrativos e `noindex`.
+
+Para conferir o destino localmente, execute `npm run build` e `npm run preview`, depois abra `http://localhost:3000/CODEX/`. Use os comandos com `--base=./` na prévia cloud ou quando a hospedagem precisar de caminhos relativos.
+
 ## Preparar a publicação na Hostinger
 
 Use um produto/plano que permita hospedar arquivos estáticos próprios. O editor visual da Hostinger não é um caminho de importação garantido para este projeto. Não é preciso contratar um plano, comprar domínio ou acessar uma conta de hospedagem para utilizar o beta local.
 
-1. Personalize o conteúdo e gere novamente o build com `npm run build`.
-2. Confira o resultado com `npm run preview`, inclusive menu, imagens, filtros e pedido.
+1. Personalize o conteúdo e gere novamente o build com `npm run build -- --base=./` para usar caminhos relativos.
+2. Confira o resultado com `npm run preview -- --base=./`, inclusive menu, imagens, filtros e pedido.
 3. Antes de substituir um site existente, faça uma cópia e identifique os arquivos que precisam ser preservados.
 4. Pelo gerenciador de arquivos ou outro método do plano, envie **o conteúdo de `dist/`** para a pasta pública, normalmente `public_html`. O arquivo `index.html` deve ficar diretamente nessa pasta; não envie a pasta `dist` como uma camada adicional.
 5. Não envie `node_modules`, arquivos `.env`, código-fonte ou o servidor de desenvolvimento como se fossem o site publicado.
 6. Depois da publicação feita pelo responsável, confira HTTPS, carregamento de assets, âncoras e fluxo de pedido no domínio final.
 
-O build padrão usa `base: './'`, com caminhos relativos de HTML, scripts, estilos e imagens. Isso permite hospedar o conteúdo de `dist/` na raiz do domínio ou em uma subpasta, inclusive quando uma prévia usa um prefixo na URL. Coloque `index.html` diretamente na pasta pública escolhida.
+O build padrão usa `/CODEX/` para o GitHub Pages. A opção `--base=./` gera caminhos relativos de HTML, scripts, estilos e imagens para outra hospedagem na raiz ou em uma subpasta. Coloque `index.html` diretamente na pasta pública escolhida.
 
 Se a hospedagem exigir um caminho base absoluto conhecido, você pode substituí-lo explicitamente no build, por exemplo:
 
@@ -119,7 +133,7 @@ Se a hospedagem exigir um caminho base absoluto conhecido, você pode substituí
 npm run build -- --base=/traco/
 ```
 
-Nesse caso, envie o conteúdo de `dist/` para a subpasta correspondente e confira as imagens e os demais recursos. O helper de assets acompanha o caminho base do Vite. Para um domínio real, `siteUrl` deve corresponder à URL final, incluindo a subpasta quando houver. Use novamente `npm run build` para retornar ao padrão de caminhos relativos.
+Nesse caso, envie o conteúdo de `dist/` para a subpasta correspondente e confira as imagens e os demais recursos. O helper de assets acompanha o caminho base do Vite. Para um domínio real, `siteUrl` deve corresponder à URL final, incluindo a subpasta quando houver. Use novamente `npm run build` para retornar ao padrão `/CODEX/` do GitHub Pages.
 
 ## Antes de usar com um cliente real
 

@@ -2,9 +2,9 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { studio } from './src/data/studio.ts';
 
-// Relative public URLs also work when the cloud preview is forwarded under a
-// path prefix; assets must stay inside that prefix instead of requesting /assets.
-const base = './';
+// GitHub Pages serves this project beneath the case-sensitive repository path.
+// For a cloud preview with another prefix, override with --base=./.
+const base = '/CODEX/';
 let resolvedBase = base;
 const escapeHtml = (text: string) => text.replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]!);
 function realSiteUrl() {
