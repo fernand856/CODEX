@@ -1,0 +1,122 @@
+.portfolio-section,.styles-section{padding:110px 0;background:var(--paper);color:var(--ink)}
+.portfolio-heading,.styles-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:50px;margin-bottom:50px}
+.portfolio-heading .section-title,.artists-heading .section-title,.styles-heading .section-title{font-style:italic}
+.portfolio-intro{max-width:330px;padding-bottom:8px}
+.portfolio-intro>p,.styles-heading>p{font-size:15px;line-height:1.8;color:var(--muted);margin:0 0 20px}
+.portfolio-demo-label{font-size:10px;text-transform:uppercase;letter-spacing:.09em;line-height:1.8;display:block}
+.portfolio-toolbar{display:flex;align-items:center;justify-content:space-between;gap:26px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0}
+.portfolio-style-filters{display:flex;flex-wrap:wrap;gap:4px}
+.portfolio-filter{min-height:44px;border:0;padding:10px 17px;background:transparent;border-radius:2px;font-size:12px;color:var(--ink);cursor:pointer;transition:background-color 180ms,color 180ms}
+.portfolio-filter:hover{background:rgba(23,23,21,.06)}
+.portfolio-filter.is-selected{background:var(--ink);color:var(--paper)}
+.portfolio-artist-filter{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.portfolio-artist-filter label{font-size:11px;color:var(--muted)}
+.portfolio-artist-filter select{color:var(--ink);font-family:inherit;font-size:12px;border:0;border-bottom:1px solid var(--line);background:transparent;min-height:44px;max-width:100%;padding:9px 24px 9px 8px;cursor:pointer}
+.portfolio-result-count{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:19px 0 27px;min-height:16px}
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:42px 26px}
+.portfolio-work{margin:0;min-width:0}
+.portfolio-image-button{position:relative;display:block;width:100%;padding:0;border:0;cursor:pointer;background:#d6d0c5;overflow:hidden;aspect-ratio:4/5}
+.portfolio-work-1 .portfolio-image-button,.portfolio-work-4 .portfolio-image-button{aspect-ratio:4/5}
+.portfolio-image-button>img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 300ms ease}
+.portfolio-image-button:hover>img{transform:scale(1.035)}
+.portfolio-enlarge{position:absolute;right:14px;bottom:14px;background:var(--paper);color:var(--ink);display:grid;place-items:center;width:38px;height:38px;border-radius:50%;font-size:22px;transition:background 180ms,color 180ms}
+.portfolio-image-button:hover .portfolio-enlarge{background:var(--ink);color:var(--paper)}
+.portfolio-work figcaption{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding-top:16px}
+.portfolio-work h3{font-size:15px;font-weight:500;line-height:1.35;margin:0 0 5px}
+.portfolio-work figcaption p{font-size:10px;color:var(--muted);line-height:1.6;margin:0}
+.portfolio-work figcaption p span{padding:0 5px;color:#b5ad9f}
+.portfolio-work-style{font-size:9px;letter-spacing:.05em;text-transform:uppercase;padding-top:4px;white-space:nowrap}
+.portfolio-more{display:flex;justify-content:center;align-items:center;gap:26px;margin-top:45px}
+.portfolio-more>span{font-size:11px;color:var(--muted)}
+.portfolio-empty{padding:65px 20px;text-align:center;border-bottom:1px solid var(--line)}
+.portfolio-empty h3{font-family:Georgia,serif;font-style:italic;font-weight:400;font-size:clamp(24px,4vw,36px);margin:15px auto;max-width:500px}
+.portfolio-empty>p:not(.eyebrow){color:var(--muted);font-size:14px;line-height:1.7}
+.portfolio-empty>.button{margin-top:16px}
+.work-lightbox{position:fixed;max-width:calc(100% - 28px);width:min(1080px,calc(100vw - 48px));max-height:calc(100% - 48px);padding:0;border:1px solid #45443d;border-radius:2px;background:var(--ink);color:var(--paper);overflow:auto;box-shadow:0 16px 80px #0005}
+.work-lightbox[open]{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+.work-lightbox::backdrop{background:rgba(0,0,0,.83)}
+.lightbox-close-wrap{position:sticky;top:0;height:0;grid-column:1/-1;z-index:2}
+.lightbox-close{position:absolute;right:14px;top:14px;z-index:2;width:44px;height:44px;border:1px solid #787268;border-radius:50%;background:var(--ink);color:var(--paper);font-size:32px;line-height:1;cursor:pointer;display:grid;place-items:center}
+.lightbox-close:hover{background:var(--paper);color:var(--ink)}
+.lightbox-image-wrap{background:#111;display:flex;align-items:center;min-width:0}
+.lightbox-image{width:100%;height:auto;max-height:calc(100dvh - 50px);object-fit:contain;display:block}
+.lightbox-information{padding:74px 38px 32px;min-width:0}
+.lightbox-navigation{display:flex;align-items:center;justify-content:space-between;margin-bottom:25px;gap:12px}
+.lightbox-navigation .eyebrow{font-size:9px;margin:0;color:#bdb6aa;letter-spacing:.08em}
+.lightbox-navigation>div{display:flex;gap:7px}
+.lightbox-arrow{width:44px;height:44px;color:var(--paper);background:transparent;border:1px solid #5d594f;cursor:pointer;font-size:21px;border-radius:50%;display:inline-grid;place-items:center}
+.lightbox-arrow:hover{background:#35342e}
+.lightbox-arrow:disabled{opacity:.4;cursor:default}
+.lightbox-style{display:inline-block;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:#d6ba8a}
+.lightbox-information h2{font-family:Georgia,serif;font-style:italic;font-weight:400;font-size:clamp(30px,4vw,46px);line-height:1.1;margin:13px 0 20px}
+.lightbox-information>p{font-size:13px;line-height:1.8;color:#c4bdb3}
+.lightbox-meta{border-top:1px solid #4b473e;margin:26px 0 22px;padding-top:18px;display:flex;gap:32px;flex-wrap:wrap}
+.lightbox-meta dt{font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:#aba397;margin-bottom:7px}
+.lightbox-meta dd{font-size:12px;margin:0}
+.lightbox-information .lightbox-demo{font-size:11px;color:#bfb7aa;margin:20px 0}
+.lightbox-plan{width:100%;font-size:11px!important;min-height:52px;text-align:left;justify-content:space-between;padding:14px 17px!important;line-height:1.5;gap:12px}
+.lightbox-information .lightbox-keyboard-tip{font-size:9px;color:#9e978a;margin-top:16px;letter-spacing:.025em}
+.artists-section{padding:112px 0 74px;background:var(--ink);color:var(--paper)}
+.artists-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:50px;margin-bottom:52px}
+.artists-heading .eyebrow{color:#bbb2a4}
+.artists-heading>p{font-size:13px;line-height:1.8;color:#c4bdb3;max-width:290px;padding-bottom:10px}
+.artists-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px}
+.artist-profile{min-width:0}
+.artist-portrait{position:relative;aspect-ratio:4/5;background:#34332e;overflow:hidden}
+.artist-portrait img{display:block;width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:filter 300ms}
+.artist-profile:hover .artist-portrait img{filter:grayscale(.6)}
+.artist-number{position:absolute;bottom:18px;left:19px;font-family:Georgia,serif;font-size:35px;font-style:italic;line-height:1;color:var(--paper);text-shadow:0 1px 10px #0008}
+.artist-name-line{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-top:23px}
+.artist-name-line h3{font-family:Georgia,serif;font-style:italic;font-weight:400;font-size:30px;margin:0}
+.artist-name-line>svg{width:24px;height:24px;color:#b4aa99;flex-shrink:0}
+.artist-specialty{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#c9b285;margin:9px 0 17px;line-height:1.6}
+.artist-bio{font-size:12px;line-height:1.85;color:#c4bdb3;min-height:68px;margin:0 0 18px}
+.artist-actions{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;border-top:1px solid #454138;padding-top:8px}
+.artist-work-button,.artist-session-button{background:transparent;border:0;font-family:inherit;font-size:11px;color:var(--paper);min-height:44px;padding:9px 0;cursor:pointer;display:flex;align-items:center;gap:15px}
+.artist-work-button svg,.artist-session-button svg{width:17px;height:17px;flex-shrink:0}
+.artist-session-button{color:#c4bdb3}
+.artist-work-button:hover,.artist-session-button:hover{text-decoration:underline;text-underline-offset:5px}
+.artists-demo-note{font-size:9px;letter-spacing:.025em;color:#b0a797;margin:42px 0 0;line-height:1.7}
+.styles-section{padding-bottom:88px}
+.styles-heading{margin-bottom:44px}
+.styles-heading>p{max-width:290px;margin-bottom:8px;font-size:13px}
+.styles-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+.style-option{display:flex;flex-direction:column;text-align:left;cursor:pointer;border:0;background:transparent;padding:0;color:var(--ink);min-width:0}
+.style-image-wrap{position:relative;display:block;width:100%;aspect-ratio:4/4.8;overflow:hidden;background:#cfc9bd}
+.style-image-wrap>img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 300ms ease}
+.style-option:hover .style-image-wrap>img{transform:scale(1.035)}
+.style-index{position:absolute;top:13px;left:14px;font-size:10px;background:var(--paper);border-radius:50%;width:28px;height:28px;display:grid;place-items:center}
+.style-name{display:flex;justify-content:space-between;align-items:center;gap:10px;font-family:Georgia,serif;font-style:italic;font-size:28px;width:100%;margin-top:20px}
+.style-name>svg{width:21px;height:21px;flex-shrink:0}
+.style-description{font-size:12px;line-height:1.75;color:var(--muted);display:block;margin-top:9px}
+.style-explorer{margin-top:62px;padding-top:30px;border-top:1px solid var(--line)}
+.style-explorer-heading{display:flex;align-items:center;justify-content:space-between;gap:25px}
+.style-explorer-heading .eyebrow{margin-bottom:11px}
+.style-explorer-heading h3{font-family:Georgia,serif;font-style:italic;font-size:30px;font-weight:400;margin:0}
+.style-explorer-heading>.button{font-size:11px;min-width:230px;justify-content:space-between}
+.style-explorer-panel{display:grid;grid-template-columns:1fr 1fr;gap:50px;padding-top:34px;margin-top:26px;border-top:1px solid var(--line)}
+.style-explorer-panel[hidden]{display:none}
+.style-questions fieldset{border:0;padding:0;margin:0 0 24px;min-width:0}
+.style-questions legend{font-size:13px;line-height:1.6;margin-bottom:13px}
+.style-questions legend>span{font-size:9px;color:var(--muted);margin-right:10px}
+.style-choice-row{display:flex;gap:10px;flex-wrap:wrap}
+.style-choice-row label{display:flex;align-items:center;gap:10px;border:1px solid var(--line);padding:13px 14px;min-height:48px;cursor:pointer;font-size:11px;line-height:1.5}
+.style-choice-row label:has(input:checked){border-color:var(--ink);background:#e6e1d6}
+.style-choice-row input{margin:0;accent-color:var(--ink);width:16px;height:16px;flex-shrink:0}
+.style-explorer-disclaimer{font-size:11px;line-height:1.75;max-width:390px;color:var(--muted);margin:27px 0 0}
+.style-suggestion{display:flex;align-items:center;gap:24px;background:#e9e4d9;padding:22px;min-height:250px;min-width:0}
+.style-suggestion>img{width:35%;max-width:160px;min-width:100px;height:210px;object-fit:cover;flex-shrink:0}
+.style-suggestion>p{font-family:Georgia,serif;font-style:italic;font-size:23px;line-height:1.5;margin:0 15px;color:var(--muted)}
+.style-suggestion>div{min-width:0}
+.style-suggestion .eyebrow{font-size:8px;letter-spacing:.09em;margin-bottom:10px}
+.style-suggestion h4{font-family:Georgia,serif;font-style:italic;font-weight:400;font-size:30px;margin:0 0 12px}
+.style-suggestion>div>p:not(.eyebrow){font-size:11px;line-height:1.7;color:var(--muted);margin-bottom:6px}
+.style-suggestion-link{display:flex;align-items:center;justify-content:space-between;gap:15px;border:0;background:transparent;padding:10px 0;min-height:44px;font-family:inherit;font-size:11px;color:var(--ink);cursor:pointer;text-decoration:underline;text-underline-offset:4px}
+.style-suggestion .button{font-size:10px;padding:13px 14px;min-height:46px;gap:15px;line-height:1.5;width:100%;justify-content:space-between}
+@media(min-width:1000px){.portfolio-work-1,.portfolio-work-4{padding-top:38px}.portfolio-work-2 .portfolio-image-button,.portfolio-work-3 .portfolio-image-button{aspect-ratio:4/4.7}}
+@media(max-width:1023px){.portfolio-section,.styles-section,.artists-section{padding:80px 0}.portfolio-heading,.styles-heading,.artists-heading{gap:30px}.portfolio-intro{max-width:280px}.portfolio-toolbar{align-items:flex-start;gap:12px}.portfolio-filter{padding:10px 12px}.portfolio-grid{gap:30px 18px}.artists-grid{gap:20px}.artist-name-line h3{font-size:26px}.artist-bio{min-height:88px}.style-explorer-panel{gap:28px}.style-suggestion{padding:18px;gap:16px}.style-suggestion>img{min-width:80px;height:190px}.styles-grid{gap:17px}.style-name{font-size:26px}}
+@media(max-width:767px){.portfolio-section,.styles-section,.artists-section{padding:65px 0}.portfolio-heading,.styles-heading,.artists-heading{display:block;margin-bottom:30px}.portfolio-intro{max-width:380px;padding-bottom:0;margin-top:24px}.portfolio-intro>p{font-size:13px;margin-bottom:12px}.portfolio-toolbar{flex-direction:column;gap:14px;padding:12px 0}.portfolio-style-filters{gap:3px;width:100%}.portfolio-filter{font-size:11px;padding:10px 11px}.portfolio-artist-filter{width:100%;justify-content:space-between}.portfolio-artist-filter select{width:190px}.portfolio-result-count{margin:17px 0 22px}.portfolio-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:25px 15px}.portfolio-work figcaption{display:block;padding-top:11px}.portfolio-work h3{font-size:13px}.portfolio-work figcaption p{font-size:9px}.portfolio-work-style{display:block;padding-top:7px;font-size:8px}.portfolio-enlarge{width:30px;height:30px;right:9px;bottom:9px;font-size:18px}.portfolio-more{flex-direction:column;gap:14px;margin-top:35px}.artists-heading>p{max-width:390px;margin-top:22px;font-size:13px;padding-bottom:0}.artists-grid{grid-template-columns:1fr;gap:44px}.artist-profile{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1fr);column-gap:22px;align-items:start}.artist-portrait{grid-column:1;grid-row:1/5;aspect-ratio:3/4}.artist-name-line{margin-top:5px;grid-column:2}.artist-name-line h3{font-size:29px}.artist-name-line>span{display:none}.artist-specialty{grid-column:2;font-size:9px;margin:9px 0 12px}.artist-bio{grid-column:2;min-height:0;font-size:11px;line-height:1.7;margin-bottom:12px}.artist-actions{grid-column:1/3;margin-top:18px;padding-top:5px}.artists-demo-note{margin-top:32px}.styles-heading>p{margin-top:23px;max-width:360px;font-size:13px}.styles-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 18px}.style-name{font-size:27px;margin-top:16px}.style-description{font-size:11px}.style-explorer{margin-top:40px;padding-top:25px}.style-explorer-heading{flex-direction:column;align-items:flex-start;gap:23px}.style-explorer-heading h3{font-size:27px}.style-explorer-heading>.button{min-width:0;width:100%;max-width:310px}.style-explorer-panel{grid-template-columns:1fr;gap:28px;padding-top:28px;margin-top:28px}.style-suggestion{gap:22px;padding:22px}.style-suggestion>img{width:34%;max-width:150px;height:220px}.style-suggestion h4{font-size:29px}.work-lightbox{width:calc(100vw - 28px);max-height:calc(100% - 28px)}.work-lightbox[open]{display:block}.lightbox-image-wrap{height:min(50dvh,400px);min-height:180px;display:block}.lightbox-image{width:100%;height:100%;max-height:none;object-fit:contain}.lightbox-information{padding:24px}.lightbox-navigation{margin-bottom:17px}.lightbox-information h2{font-size:35px}.lightbox-meta{margin:20px 0 16px}.lightbox-close{top:11px;right:11px}.lightbox-keyboard-tip{display:none}}
+@media(max-width:389px){.portfolio-filter{font-size:10px;padding:10px 9px}.portfolio-grid{gap:24px 12px}.portfolio-work h3{font-size:12px}.artist-profile{column-gap:18px}.artist-name-line h3{font-size:26px}.artist-bio{font-size:10px}.artist-specialty{font-size:8px}.style-name{font-size:25px}.styles-grid{gap:26px 14px}.style-suggestion{gap:15px;padding:16px}.style-suggestion>img{min-width:85px;height:190px}.style-suggestion .button{font-size:9px;padding:12px 10px}.style-suggestion h4{font-size:26px}}
+@media(max-height:550px) and (min-width:768px){.lightbox-information{padding-top:60px}.lightbox-image{max-height:calc(100dvh - 50px)}.lightbox-navigation{margin-bottom:15px}.lightbox-information h2{font-size:30px}}
+@media(max-width:599px){.artist-profile{display:block}.artist-portrait{aspect-ratio:4/4.8}.artist-name-line{margin-top:21px}.artist-name-line h3{font-size:32px}.artist-name-line>svg{display:block}.artist-specialty{font-size:10px;margin:10px 0 15px}.artist-bio{font-size:13px;line-height:1.8}.artist-actions{margin-top:20px}.artists-grid{gap:45px}}
+@media(prefers-reduced-motion:reduce){.portfolio-image-button>img,.style-image-wrap>img,.artist-portrait img,.portfolio-filter,.portfolio-enlarge{transition:none}.portfolio-image-button:hover>img,.style-option:hover .style-image-wrap>img{transform:none}}
