@@ -32,7 +32,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Test request and calendar logic
-        run: npm test
+        run: npm test && npm run test:booking
       - name: Build
         run: npm run build
       - name: Upload Pages artifact

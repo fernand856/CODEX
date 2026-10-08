@@ -63,7 +63,7 @@ export const studio = {
     'O estúdio combina orçamento e data.',
     'O projeto é desenvolvido para a sessão.',
   ],
-  demoNotice: 'Projeto demonstrativo — estúdio, artistas e agenda fictícios.',
+  demoNotice: 'Projeto demonstrativo — estúdio e artistas fictícios. Reservas na agenda do Lucas são registradas no sistema.',
   portfolioNotice: 'Portfólio ilustrativo',
   contactNotice: 'Demonstração: contato do estúdio ainda não configurado.',
   locationNotice: 'Vitória, ES — localização ilustrativa do conceito',

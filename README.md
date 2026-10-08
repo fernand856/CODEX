@@ -1,3 +1,7 @@
+# Agendamento funcional do Lucas
+
+A evolução da agenda está documentada em [AGENDAMENTO.md](AGENDAMENTO.md). A reserva funcional exige Node.js 24 e SQLite persistente; o GitHub Pages permanece uma demonstração estática e não confirma reservas.
+
 # TRAÇO Tattoo Studio
 
 Beta de uma landing page em português brasileiro para um estúdio fictício de tatuagem. O projeto usa React, TypeScript e Vite e gera arquivos estáticos, sem servidor de aplicação na hospedagem.

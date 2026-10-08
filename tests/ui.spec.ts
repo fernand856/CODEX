@@ -59,7 +59,7 @@ async function assertAccessible(page: Page) {
 }
 
 async function fillIdea(page: Page, description = 'Um ramo botânico leve para acompanhar o antebraço.') {
-  const booking = page.locator('#agenda');
+  const booking = page.locator('#pedido');
   await booking.getByLabel(/^Estilo\s/).selectOption('fine-line');
   await booking.getByLabel(/^Artista\s/).selectOption('nina');
   await booking.getByLabel(/^Região do corpo\s/).selectOption('Antebraço');
@@ -69,7 +69,7 @@ async function fillIdea(page: Page, description = 'Um ramo botânico leve para a
 
 async function finishDemoRequest(page: Page) {
   await fillIdea(page);
-  const booking = page.locator('#agenda');
+  const booking = page.locator('#pedido');
   await booking.getByRole('button', { name: 'Continuar', exact: true }).click();
   await booking.getByRole('radio', { name: /^Combinar pelo WhatsApp/ }).check();
   await booking.getByRole('button', { name: 'Continuar', exact: true }).click();
@@ -85,7 +85,7 @@ for (const width of [360, 390, 768, 1024, 1440]) {
     await assertNoOverflow(page);
     await loadEveryImage(page);
     await assertNoOverflow(page);
-    await expect(page.getByText('Projeto demonstrativo — estúdio, artistas e agenda fictícios.', { exact: true })).toBeVisible();
+    await expect(page.getByText('Projeto demonstrativo — estúdio e artistas fictícios. Reservas na agenda do Lucas são registradas no sistema.', { exact: true })).toBeVisible();
     await expect(page.locator('a[href^="https://wa.me/"]')).toHaveCount(0);
     expect(await page.locator('html').getAttribute('lang')).toBe('pt-BR');
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
@@ -298,7 +298,7 @@ test('referência ampliada, perfil e explorador preenchem preferências do pedid
   await openSite(page);
   await page.getByRole('button', { name: /^Ampliar Jardim particular,/ }).click();
   await page.getByRole('dialog').getByRole('button', { name: 'Quero uma tattoo nesse estilo', exact: true }).click();
-  const booking = page.locator('#agenda');
+  const booking = page.locator('#pedido');
   await expect(booking.getByLabel(/^Estilo\s/)).toHaveValue('fine-line');
   await expect(booking.getByLabel(/^Artista\s/)).toHaveValue('nina');
   await expect(booking.getByText('Esta referência orienta um projeto próprio, desenvolvido em conversa com o artista.', { exact: true })).toBeVisible();
@@ -317,7 +317,7 @@ test(`pedido valida, mantém dados e copia a mensagem revisada em ${journeyWidth
   await page.setViewportSize({ width: journeyWidth, height: 900 });
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
   await openSite(page);
-  const booking = page.locator('#agenda');
+  const booking = page.locator('#pedido');
   await booking.getByRole('button', { name: 'Continuar', exact: true }).click();
   await expect(booking.getByLabel(/^Estilo\s/)).toBeFocused();
   await expect(booking.getByLabel(/^Estilo\s/)).toHaveAttribute('aria-invalid', 'true');
@@ -414,7 +414,7 @@ test('falha da área de transferência oferece texto selecionado para cópia man
 test('agenda recusa dias indisponíveis, exige período e limpa preferência incompatível ao mudar artista', async ({ page }) => {
   await openSite(page);
   await fillIdea(page);
-  const booking = page.locator('#agenda');
+  const booking = page.locator('#pedido');
   await booking.getByRole('button', { name: 'Continuar', exact: true }).click();
   await booking.getByRole('radio', { name: /^Escolher uma preferência de data/ }).check();
   await booking.getByRole('button', { name: 'Continuar', exact: true }).click();
@@ -453,7 +453,7 @@ test('pedido aberto à meia-noite de São Paulo não mantém uma data que passou
   await page.clock.setFixedTime(new Date('2026-10-07T23:59:30-03:00'));
   await openSite(page);
   await fillIdea(page);
-  const booking = page.locator('#agenda');
+  const booking = page.locator('#pedido');
   await booking.getByRole('button', { name: 'Continuar', exact: true }).click();
   await booking.getByRole('radio', { name: /^Escolher uma preferência de data/ }).check();
   const date = booking.getByLabel(/^Data demonstrativa\s/);
