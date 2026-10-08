@@ -2,8 +2,8 @@ import { test, expect } from '@playwright/test';
 import { createServer, request } from 'node:http';
 import type { AddressInfo } from 'node:net';
 
-test('build renderiza através de um proxy com prefixo e hostname encaminhado', async ({ page, baseURL }) => {
-  const prefix = '/preview/traco/';
+test('build carrega scripts, CSS e imagens sob /CODEX/ com hostname encaminhado', async ({ page, baseURL }) => {
+  const prefix = '/CODEX/';
   const failures: string[] = [];
   page.on('pageerror', error => failures.push(error.message));
   page.on('response', response => { if (response.status() >= 400) failures.push(`${response.status()} ${response.url()}`); });
@@ -12,7 +12,7 @@ test('build renderiza através de um proxy com prefixo e hostname encaminhado', 
       outgoing.writeHead(404).end('Outside preview prefix');
       return;
     }
-    const target = new URL(incoming.url.slice(prefix.length - 1), baseURL);
+    const target = new URL(incoming.url, baseURL);
     const upstream = request(target, {
       method: incoming.method,
       headers: { ...incoming.headers, host: 'preview.example.test' },
@@ -30,10 +30,17 @@ test('build renderiza através de um proxy com prefixo e hostname encaminhado', 
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(/Sua história,\s*em traços\./);
     await page.locator('.hero-figure img').evaluate(image => (image as HTMLImageElement).decode());
     expect(await page.locator('.hero-figure img').evaluate(image => (image as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+    await page.getByRole('button', { name: 'Ver mais trabalhos', exact: true }).click();
+    const images = page.locator('img');
+    expect(await images.count()).toBe(22);
+    for (const image of await images.all()) {
+      await image.scrollIntoViewIfNeeded();
+      await expect.poll(() => image.evaluate(element => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+    }
     const paths = await page.evaluate(() => [
       ...Array.from(document.querySelectorAll<HTMLScriptElement>('script[src]'), element => element.src),
       ...Array.from(document.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"], link[rel="icon"]'), element => element.href),
-      (document.querySelector('.hero-figure img') as HTMLImageElement).src,
+      ...Array.from(document.images, image => image.src),
     ].map(value => new URL(value).pathname));
     expect(paths.every(path => path.startsWith(prefix))).toBe(true);
     await page.locator('#trabalhos').getByRole('button', { name: /^Ampliar Entre sombras,/ }).click();

@@ -8,7 +8,7 @@ export default defineConfig({
   fullyParallel: false,
   reporter: 'list',
   use: {
-    baseURL: 'http://127.0.0.1:4173',
+    baseURL: 'http://127.0.0.1:4173/CODEX/',
     headless: true,
     launchOptions: {
       ...(existsSync('/usr/bin/chromium') ? { executablePath: '/usr/bin/chromium' } : {}),
@@ -18,7 +18,7 @@ export default defineConfig({
   },
   webServer: {
     command: 'npm run preview -- --port 4173 --strictPort',
-    url: 'http://127.0.0.1:4173',
+    url: 'http://127.0.0.1:4173/CODEX/',
     reuseExistingServer: !process.env.CI,
     timeout: 30000,
   },

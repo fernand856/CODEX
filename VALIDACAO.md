@@ -114,6 +114,21 @@ O código-fonte, documentação, fotografias, lockfile, configurações e testes
 
 Os ZIPs e a página auxiliar foram gerados localmente e ficam fora do versionamento desta entrega. A preparação local não implica envio ao GitHub ou outra publicação externa.
 
+## Configuração do GitHub Pages — 7/10/2026
+
+O padrão do Vite passou a ser `/CODEX/` para o destino `https://fernand856.github.io/CODEX/`. O workflow `.github/workflows/pages.yml` instala pelo lockfile, executa testes de lógica e o build com TypeScript e publica somente `dist/` usando as actions oficiais do Pages. PRs compilam e a publicação é restrita à `main`.
+
+Verificações locais desta configuração:
+
+- `npm ci`: instalação concluída pelo lockfile com Node.js 24.19.0.
+- `npm test`: 11 testes de lógica aprovados.
+- `npm run build -- --outDir /tmp/traco-pages-build --emptyOutDir`: TypeScript e build aprovados com a base padrão `/CODEX/`; o destino isolado preservou a prévia cloud em execução.
+- Interface: 21 testes aprovados em 53,7 s no build isolado, incluindo carregamento de scripts, CSS, favicon e 22 elementos de imagem sob `/CODEX/`, filtros, lightbox, pedido, calendário e cópia.
+- `actionlint` 1.7.7: workflow aprovado. A ferramenta foi obtida do release oficial com checksum SHA-256 conferido.
+- Prévia cloud: `npm run build -- --base=./ --outDir dist-cloud` aprovado; preview temporário serviu HTML, JavaScript, CSS e hero com HTTP 200. O processo temporário foi encerrado, e as instruções cloud foram salvas em rascunho para usar essa saída separada.
+
+A execução do workflow no GitHub e a URL pública dependem da configuração **Settings → Pages → Source: GitHub Actions** e da incorporação do PR à `main`. As verificações locais não comprovam um deployment remoto.
+
 ## Limites da entrega
 
 - HTTPS, configuração da Hostinger e funcionamento no domínio final precisam ser conferidos pelo responsável após a publicação.
