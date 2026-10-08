@@ -10,3 +10,8 @@ playwright-report/
 *.log
 entrega/*.zip
 entrega/SHA256SUMS
+
+var/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal

@@ -271,7 +271,7 @@ export function Booking({ preset }: BookingProps) {
     { label: 'Orçamento', value: request.budget.trim() || 'Prefiro conversar', step: 1, field: 'budget' },
   ];
 
-  return <section className="booking-section" id="agenda" aria-labelledby="booking-title">
+  return <section className="booking-section" id="pedido" aria-labelledby="booking-title">
     <div className="container">
       <div className="booking-section-heading">
         <p className="eyebrow">05 / SUA PRÓXIMA TATUAGEM</p>

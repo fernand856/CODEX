@@ -3,11 +3,11 @@ import type { Artist, Style, Work } from '../types';
 export const artists: Artist[] = [
   {
     id: 'caio',
-    name: 'Caio Mendes',
+    name: 'Lucas',
     specialty: 'Blackwork e geometria',
     bio: 'Explora o contraste entre áreas de preto, linhas e espaço livre. Seu olhar parte das formas para criar composições marcantes que acompanham o corpo.',
     image: '/images/artist-caio.webp',
-    alt: 'Retrato ilustrativo de Caio Mendes em um ambiente de criação.',
+    alt: 'Retrato ilustrativo de Lucas em um ambiente de criação.',
   },
   {
     id: 'nina',
@@ -56,6 +56,6 @@ export const faq = [
   { question: 'Posso conversar sobre a ideia antes de escolher um artista?', answer: 'Sim. Selecione “Quero ajuda para escolher” no pedido. A conversa pode ajudar a aproximar sua ideia de um estilo e de um artista.' },
   { question: 'Como escolher o tamanho e a região do corpo?', answer: 'Escolha uma referência aproximada ou marque que quer orientação. Tamanho, detalhes e composição podem ser discutidos com o artista antes de definir o projeto.' },
   { question: 'Posso levar referências?', answer: 'Sim. Você pode incluir um link no formulário e enviar imagens na conversa pelo WhatsApp. A referência orienta um projeto próprio, sem propor uma cópia do trabalho de outra pessoa.' },
-  { question: 'Selecionar uma data no site confirma minha sessão?', answer: 'Não. As datas deste site são demonstrativas e indicam apenas uma preferência de atendimento. A data e o orçamento serão confirmados pelo estúdio após avaliar sua ideia.' },
+  { question: 'Selecionar uma data no site confirma minha sessão?', answer: 'Na agenda do Lucas, a reserva é confirmada quando o site exibe um protocolo. O formulário de outros estilos registra apenas preferências. Orçamento e projeto dependem da conversa com o artista.' },
   { question: 'Como conversar sobre cobertura ou retoque?', answer: 'Descreva que deseja conversar sobre uma cobertura ou um retoque. O artista precisa avaliar o projeto e as referências para discutir as possibilidades; você pode compartilhar imagens durante a conversa.' },
 ];

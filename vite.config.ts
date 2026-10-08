@@ -44,7 +44,7 @@ export default defineConfig({
     },
   }],
   base,
-  server: { host: '0.0.0.0', port: 3000, strictPort: true },
+  server: { proxy: { '/api': 'http://127.0.0.1:3001' }, host: '0.0.0.0', port: 3000, strictPort: true },
   preview: {
     host: '0.0.0.0',
     port: 3000,

@@ -7,6 +7,7 @@ import { Portfolio, type PortfolioFilter } from './components/Portfolio';
 import { Artists } from './components/Artists';
 import { Styles } from './components/Styles';
 import Studio from './components/Studio';
+import { Reservation } from './components/Reservation';
 import { Booking } from './components/Booking';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
@@ -22,7 +23,7 @@ export default function App() {
   const [preset, setPreset] = useState<{ value: Partial<TattooRequest>; key: number } | null>(null);
   const plan = (value: Partial<TattooRequest> = {}) => {
     setPreset(previous => ({ value, key: (previous?.key ?? 0) + 1 }));
-    scrollToSection('agenda');
+    scrollToSection((value.artist && value.artist !== 'caio') || (value.style && value.style !== 'blackwork') ? 'pedido' : 'agenda');
   };
   const artistWorks = (artist: ArtistId) => {
     setFilter({ style: 'all', artist });
@@ -73,6 +74,7 @@ export default function App() {
       <Artists onViewWorks={artistWorks} onPlan={plan} />
       <Styles onFilter={styleWorks} onPlan={plan} />
       <Studio />
+      <Reservation preset={preset} />
       <Booking preset={preset} />
       <FAQ />
     </main>
